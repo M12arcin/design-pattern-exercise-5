@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDateTime;
 
 public class Auction {
-
+    private static int counter = 1;
     private int id;
     private String item;
     private String description;
@@ -13,13 +13,26 @@ public class Auction {
     private Customer buyer;
 
     public Auction(int id, String item, String description, LocalDateTime dueDate, Customer seller, double highestBid, Customer buyer) {
-        this.id = id;
+        this.id = counter++;
         this.item = item;
         this.description = description;
         this.dueDate = dueDate;
         this.seller = seller;
         this.highestBid = highestBid;
         this.buyer = buyer;
+    }
+
+    @Override
+    public String toString() {
+        return "Auction{" +
+                "id=" + id +
+                ", item='" + item + '\'' +
+                ", description='" + description + '\'' +
+                ", dueDate=" + dueDate +
+                ", seller=" + seller +
+                ", highestBid=" + highestBid +
+                ", buyer=" + buyer +
+                '}';
     }
 
     public int getId() {
@@ -76,5 +89,68 @@ public class Auction {
 
     public void setBuyer(Customer buyer) {
         this.buyer = buyer;
+    }
+
+    public static class AuctionBuilder {
+
+        private int id;
+        private String item;
+        private String description;
+        private LocalDateTime dueDate;
+        private Customer seller;
+        private double highestBid;
+        private Customer buyer;
+
+        public static AuctionBuilder bulider (){
+            return new AuctionBuilder();
+        }
+
+        public AuctionBuilder withId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public AuctionBuilder withItem(String item) {
+            this.item = item;
+            return this;
+        }
+
+        public AuctionBuilder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public AuctionBuilder withDueDate(LocalDateTime dueDate) {
+            this.dueDate = dueDate;
+            return this;
+        }
+
+        public AuctionBuilder withSeller(Customer seller) {
+            this.seller = seller;
+            return this;
+        }
+
+        public AuctionBuilder withHighestBid(double highestBid) {
+            this.highestBid = highestBid;
+            return this;
+        }
+
+        public AuctionBuilder withBuyer(Customer buyer) {
+            this.buyer = buyer;
+            return this;
+        }
+
+        public Auction build(){
+            Auction auction = new Auction();
+            auction.id=this.id;
+            auction.item=this.item;
+            auction.description=this.description;
+            auction.dueDate=this.dueDate;
+            auction.seller=this.seller;
+            auction.highestBid=this.highestBid;
+            auction.buyer=this.buyer;
+
+            return auction;
+        }
     }
 }
