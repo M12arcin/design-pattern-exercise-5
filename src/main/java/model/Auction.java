@@ -3,14 +3,12 @@ package model;
 import java.time.LocalDateTime;
 
 public class Auction {
-    private int id;
 
+    private int id;
     private String item;
     private String description;
     private LocalDateTime dueDate;
-
     private Customer seller;
-
     private double highestBid;
     private Customer buyer;
 
